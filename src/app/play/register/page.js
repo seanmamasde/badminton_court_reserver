@@ -25,6 +25,15 @@ export default function Register() {
     alert(`Navigating to reservation page for ${selectedDate}`);
   };
 
+  const gridData = Array.from({ length: 7 }, () => Array(16).fill("empty"));
+
+  const statusColors = {
+    full: "red",
+    empty: "white",
+    unavailable: "black"
+  };
+  gridData[0][0]="full"
+  
   return (
     <div>
       <AppMenubar />
@@ -41,12 +50,19 @@ export default function Register() {
               </tr>
             </thead>
             <tbody>
-              {days.map((day) => (
+              {days.map((day, rowIndex) => (
                 <tr key={day}>
                   <td>{day}</td>
-                  {timeSlots.map((_, idx) => (
-                    <td key={idx}></td>
-                  ))}
+                  {timeSlots.map((_, colIndex) => (
+              <td
+                key={colIndex}
+                style={{
+                  backgroundColor: statusColors[gridData[rowIndex][colIndex]]
+                }}
+              >
+                {/* {gridData[rowIndex][colIndex]} */}
+              </td>
+            ))}
                 </tr>
               ))}
             </tbody>
